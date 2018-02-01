@@ -1,2 +1,4 @@
 ### zookeeper
 ### registry
+### gitlab
+### codis
