@@ -1,0 +1,1 @@
+docker pull trion/jenkins-docker-client
