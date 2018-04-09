@@ -8,6 +8,7 @@ ENV MAX_UPLOAD 50M
 ENV PHP_MAX_FILE_UPLOAD 200
 ENV PHP_MAX_POST 100M
 ENV PHP_EXT_SWOOLE=swoole-2.0.6
+ENV PHP_REDIS=3.1.4
 
 # 备份原始文件
 # 修改为国内镜像源
@@ -26,6 +27,7 @@ RUN set -xe \
     && rm -rf /usr/src/php/ext/memcached \
     && apk del .memcached-deps
 
+# pecl install yaf-3.0.6 redis-3.1.6 memcached-3.0.4
 RUN cd /tmp && pecl download yaf-3.0.6 && \
     mkdir -p /tmp/yaf-3.0.6 && \
     tar -xf yaf-3.0.6.tgz -C /tmp/yaf-3.0.6 --strip-components=1 && \
@@ -61,6 +63,13 @@ RUN cd /tmp && pecl download apcu-5.1.11 && \
     sed -i '$a\apc.shm_size=32M' /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini && \
     sed -i '$a\apc.enable_cli=1' /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini && \
     rm -rf /tmp/apcu-*
+
+#RUN cd /tmp && pecl download memcache-2.2.7 && \
+#    mkdir -p /tmp/memcache-2.2.7 && \
+#    tar -xf memcache-2.2.7.tgz -C /tmp/memcache-2.2.7 --strip-components=1 && \
+#    docker-php-ext-configure /tmp/memcache-2.2.7 && \
+#    docker-php-ext-install /tmp/memcache-2.2.7 && \
+#    rm -rf /tmp/memcache-*
 
 #RUN cd /tmp \
 #    && pecl download $PHP_EXT_SWOOLE \
