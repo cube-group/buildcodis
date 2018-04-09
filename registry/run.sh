@@ -15,8 +15,6 @@ mkdir -p /data/docker/registry
 
 docker run -d --restart=always \
 -p 5000:5000 \
---net=fykc \
---add-host="master:10.0.0.1" \
 -e "REGISTRY_AUTH=htpasswd" \
 -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" \
 -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd \
